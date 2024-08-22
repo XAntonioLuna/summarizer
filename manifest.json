@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Summarizer",
+  "version": "1.0",
+
+  "description": "Add on that summarizes the content of the page you're visiting using Open AI APIs",
+  "icons": {
+    "48": "icons/logo-48.jpg"
+  },
+
+  "browser_action": {
+    "default_icon": "icons/logo-32.jpg",
+    "default_title": "Summarizer",
+    "default_popup": "popup/display_content.html"
+  },
+  "permissions": ["activeTab", "storage"],
+  "options_ui": {
+    "page": "./settings/options.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "addon@example.com"
+    }
+  }
+}

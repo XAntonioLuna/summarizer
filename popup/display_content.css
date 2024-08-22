@@ -1,0 +1,38 @@
+.page-content {
+  /* Box styling */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+
+  /* Shadow for depth */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* Font styling */
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  white-space: pre-wrap; /* Makes sure long lines break and fit within the box */
+
+  /* Width and margin */
+  max-width: 800px;
+  margin: 20px auto;
+
+  /* Transition for smooth hover effect */
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.page-content:hover {
+  border-color: #bbb;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  .page-content {
+    padding: 15px;
+    font-size: 14px;
+  }
+}
