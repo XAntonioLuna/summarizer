@@ -18,10 +18,10 @@ async function openAIRequest(apiKey, pageContent) {
   return response;
 }
 
-async function updateSummary(pageMessage) {
+async function generateNewSummary(pageMessage) {
   try {
     // Update user on status
-    document.getElementById("page-content").innerText = "Loading summary...";
+    document.getElementById("page-content").innerText = window.lastSummary;
 
     // Try fetching the API key
     const { apiKey } = await browser.storage.sync.get("apiKey");
@@ -41,11 +41,20 @@ async function updateSummary(pageMessage) {
 
 function processOpenAIResponse(jsonResponse) {
   const result = jsonResponse.choices[0].message.content;
-  document.getElementById("page-content").innerText = result;
+  window.lastSummary = result;
+  updateDisplayedSummary(result);
 }
 
+function updateDisplayedSummary() {
+  document.getElementById("page-content").innerText =
+    window.lastSummary || "Loading summary...";
+}
+
+// Load last seen summary
+updateDisplayedSummary();
+
 // Create a listener that will wait for the page content to be fetched
-browser.runtime.onMessage.addListener(updateSummary);
+browser.runtime.onMessage.addListener(generateNewSummary);
 
 // Inject the content script to the tab
 browser.tabs.executeScript({ file: "/content/share_content.js" });

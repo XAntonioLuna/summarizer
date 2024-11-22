@@ -1,21 +1,19 @@
 function saveOptions(e) {
   e.preventDefault();
-  browser.storage.sync.set({
-    apiKey: document.querySelector("#api-key").value,
-  });
+  browser.storage.local
+    .set({
+      apiKey: document.querySelector("#api-key").value,
+    })
+    .catch((error) => console.error("Failed to save options:", error));
 }
 
 function restoreOptions() {
-  function setCurrentChoice(result) {
-    document.querySelector("#api-key").value = result.apiKey || "";
-  }
-
-  function onError(error) {
-    console.log(`Error: ${error}`);
-  }
-
-  let getting = browser.storage.sync.get("apiKey");
-  getting.then(setCurrentChoice, onError);
+  browser.storage.local
+    .get("apiKey")
+    .then((result) => {
+      document.querySelector("#api-key").value = result.apiKey || "";
+    })
+    .catch((error) => console.error("Failed to restore options:", error));
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);
